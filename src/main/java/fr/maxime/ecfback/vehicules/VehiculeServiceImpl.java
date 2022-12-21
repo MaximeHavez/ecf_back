@@ -1,5 +1,6 @@
 package fr.maxime.ecfback.vehicules;
 
+import fr.maxime.ecfback.locataires.Locataire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -54,6 +56,22 @@ public class VehiculeServiceImpl implements VehiculeService {
             logger.warn("Id invalide : " + id);
             return new ResponseStatusException(HttpStatus.NOT_FOUND);
         });
+    }
+
+    /**
+     * Cette fonction permet de mettre à jour le véhicule grâce à son id
+     * <b>Requête Postman en PUT</b> : localhost:8080/vehicules/<span style="color:orange">id</span>
+     * @param id L'id du véhicule
+     * @return Le véhicule mis à jour
+     */
+    @Override
+    public Vehicule update(String id) {
+        Vehicule vehicule = this.findById(id);
+        if (!Objects.equals(vehicule.getId(), id)) {
+            logger.warn("In invalide : " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return this.repository.save(vehicule);
     }
 
     /**

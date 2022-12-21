@@ -9,5 +9,7 @@ public interface VehiculeService {
 
     Vehicule findById(String id);
 
+    Vehicule update(String id);
+
     void deleteById(String id);
 }

@@ -157,4 +157,14 @@ public class VehiculeController {
     public List<Vehicule> findAllByStatus(String status) {
         return service.findAllByStatus(status);
     }
+
+    /**
+     * Cette fonction permet de mettre à jour le véhicule grâce à son id
+     * <b>Requête Postman en PUT</b> : localhost:8080/vehicules/<span style="color:orange">id</span>
+     * @param id L'id du véhicule
+     * @return Le véhicule mis à jour
+     */
+    public Vehicule update(String id) {
+        return service.update(id);
+    }
 }

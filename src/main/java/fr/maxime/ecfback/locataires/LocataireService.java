@@ -9,6 +9,8 @@ public interface LocataireService {
 
     Locataire findById(String id);
 
+    Locataire update(String id);
+
     void deleteById(String id);
 
 

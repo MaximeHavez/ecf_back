@@ -1,6 +1,5 @@
 package fr.maxime.ecfback.locations;
 
-import fr.maxime.ecfback.locataires.Locataire;
 import fr.maxime.ecfback.locataires.LocataireServiceImpl;
 import fr.maxime.ecfback.vehicules.VehiculeServiceImpl;
 import org.slf4j.Logger;
@@ -22,12 +21,10 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository repository;
     private final VehiculeServiceImpl vehiculeService;
-    private final LocataireServiceImpl locataireService;
 
     public LocationServiceImpl(LocationRepository repository,
                                VehiculeServiceImpl vehiculeService,
                                LocataireServiceImpl locataireService) {
-        this.locataireService = locataireService;
         logger.info("Création du service Location");
         this.repository = repository;
         this.vehiculeService = vehiculeService;
@@ -66,6 +63,16 @@ public class LocationServiceImpl implements LocationService {
             logger.warn("Id invalide : " + id);
             return new ResponseStatusException(HttpStatus.NOT_FOUND);
         });
+    }
+
+    @Override
+    public Location update(String id) {
+        Location location = this.findById(id);
+        if (!Objects.equals(location.getId(), id)) {
+            logger.warn("In invalide : " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return this.repository.save(location);
     }
 
     /**
@@ -118,7 +125,6 @@ public class LocationServiceImpl implements LocationService {
     public List<Location> findAllByLocataireName(String nom) {
         List<Location> locations = this.repository.findAll();
         List<Location> locationlist = new ArrayList<>();
-        logger.warn("locations : " + locations);
         for (Location location: locations
              ) {
             if (Objects.equals(location.getLocataire().getNom(), nom)) {
@@ -137,7 +143,6 @@ public class LocationServiceImpl implements LocationService {
     public List<Location> findAllByImmatriculation(String immatriculation){
         List<Location> locations = this.repository.findAll();
         List<Location> locationlist = new ArrayList<>();
-        logger.warn("locations : " + locations);
         for (Location location: locations
         ) {
             if (Objects.equals(location.getVehicule().getImmatriculation(), immatriculation)) {

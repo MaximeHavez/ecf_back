@@ -1,5 +1,7 @@
 package fr.maxime.ecfback.locations;
 
+import fr.maxime.ecfback.locataires.Locataire;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -9,6 +11,8 @@ public interface LocationService {
     Location save(Location entity);
 
     Location findById(String id);
+
+    Location update(String id);
 
     void deleteById(String id);
 

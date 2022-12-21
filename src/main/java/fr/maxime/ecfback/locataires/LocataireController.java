@@ -109,4 +109,15 @@ public class LocataireController {
     public List<Locataire> findByEmail(@RequestParam String email) {
         return service.findByEmail(email);
     }
+
+    /**
+     * Cette fonction permet de mettre à jour le locataire grâce à son id
+     * <b>Requête Postman en PUT</b> : localhost:8080/locataires/<span style="color:orange">id</span>
+     * @param id L'id du locataire
+     * @return Le locataire mis à jour
+     */
+    @PutMapping("{id}")
+    public Locataire update(@PathVariable String id) {
+        return service.update(id);
+    }
 }

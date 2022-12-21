@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -55,6 +56,22 @@ public class LocataireServiceImpl implements LocataireService {
             logger.warn("Id invalide : " + id);
             return new ResponseStatusException(HttpStatus.NOT_FOUND);
         });
+    }
+
+    /**
+     * Cette fonction permet de mettre à jour le locataire grâce à son id
+     * <b>Requête Postman en PUT</b> : localhost:8080/locataires/<span style="color:orange">id</span>
+     * @param id L'id du locataire
+     * @return Le locataire mis à jour
+     */
+    @Override
+    public Locataire update(String id) {
+        Locataire locataire = this.findById(id);
+        if (!Objects.equals(locataire.getId(), id)) {
+            logger.warn("In invalide : " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return this.repository.save(locataire);
     }
 
     /**
