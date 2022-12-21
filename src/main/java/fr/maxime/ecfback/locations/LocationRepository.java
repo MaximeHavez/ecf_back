@@ -1,7 +1,5 @@
 package fr.maxime.ecfback.locations;
 
-import fr.maxime.ecfback.locataires.Locataire;
-import fr.maxime.ecfback.vehicules.Vehicule;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.LocalDate;

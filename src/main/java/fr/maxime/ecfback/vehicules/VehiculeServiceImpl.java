@@ -1,6 +1,5 @@
 package fr.maxime.ecfback.vehicules;
 
-import fr.maxime.ecfback.locataires.Locataire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -9,7 +8,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class VehiculeServiceImpl implements VehiculeService {

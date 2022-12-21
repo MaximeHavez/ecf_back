@@ -1,7 +1,5 @@
 package fr.maxime.ecfback.locations;
 
-import fr.maxime.ecfback.locataires.Locataire;
-
 import java.time.LocalDate;
 import java.util.List;
 

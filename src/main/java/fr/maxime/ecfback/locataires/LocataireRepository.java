@@ -1,6 +1,5 @@
 package fr.maxime.ecfback.locataires;
 
-import fr.maxime.ecfback.locations.Location;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
