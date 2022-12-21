@@ -1,5 +1,6 @@
 package fr.maxime.ecfback.locations;
 
+import fr.maxime.ecfback.locataires.Locataire;
 import fr.maxime.ecfback.vehicules.Vehicule;
 import fr.maxime.ecfback.vehicules.VehiculeServiceImpl;
 import org.slf4j.Logger;
@@ -67,6 +68,54 @@ public class LocationServiceImpl implements LocationService {
         repository.deleteById(id);
     }
 
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de début de location<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datedebut?dateDebut=<span style="color:orange">dateDebut</span>
+     * @param dateDebut La date de début de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    public List<Location> findAllByDateDebut(LocalDate dateDebut) {
+        return repository.findAllByDateDebut(dateDebut);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de fin de location<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datefin?dateFin=<span style="color:orange">dateFin</span>
+     * @param dateFin La date de fin de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    public List<Location> findAllByDateFin(LocalDate dateFin) {
+        return repository.findAllByDateFin(dateFin);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de début et de fin de location
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datedebut&fin?dateDebut=<span style="color:orange">dateDebut</span>&dateFin=<span style="color:orange">dateFin</span>
+     * @param dateDebut La date de début de location (Format : "YYYY-MM-DD")
+     * @param dateFin La date de fin de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    public List<Location> findAllByDateDebutAndDateFin(LocalDate dateDebut, String dateFin) {
+        return repository.findAllByDateDebutAndDateFin(dateDebut, dateFin);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location en fonction de son locataire
+     * @param locataire Le locataire
+     * @return Une liste de Locations
+     */
+    public List<Location> findAllByLocataire(Locataire locataire) {
+        return repository.findAllByLocataire(locataire);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location en fonction de son véhicule
+     * @param vehicule Le vehicule
+     * @return Une liste de locations
+     */
+    public List<Location> findAllByVehicule(Vehicule vehicule) {
+        return repository.findAllByVehicule(vehicule);
+    }
 
     /**
      * Cette fonction permet de calculer le prix total de la location en fonction du prix à la journée du véhicule
@@ -85,6 +134,8 @@ public class LocationServiceImpl implements LocationService {
         logger.info("Prix Total : " + prixTotal);
         return prixTotal;
     }
+
+
 
 
 }

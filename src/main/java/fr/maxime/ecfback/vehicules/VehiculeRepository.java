@@ -10,7 +10,7 @@ public interface VehiculeRepository extends MongoRepository<Vehicule, String> {
     List<Vehicule> findAllByModele(String modele);
     List<Vehicule> findAllByMarqueAndModele(String marque, String modele);
     List<Vehicule> findAllByType(String type);
-    List<Vehicule> findByImmatriculation(String immatriculation);
+    Vehicule findByImmatriculation(String immatriculation);
     List<Vehicule> findAllByEtat(String etat);
     List<Vehicule> findAllByPrix(String prix);
     List<Vehicule> findAllByStatus(String status);
