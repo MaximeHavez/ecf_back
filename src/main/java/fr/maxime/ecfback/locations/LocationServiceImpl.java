@@ -1,7 +1,7 @@
 package fr.maxime.ecfback.locations;
 
 import fr.maxime.ecfback.locataires.Locataire;
-import fr.maxime.ecfback.vehicules.Vehicule;
+import fr.maxime.ecfback.locataires.LocataireServiceImpl;
 import fr.maxime.ecfback.vehicules.VehiculeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -20,8 +22,12 @@ public class LocationServiceImpl implements LocationService {
 
     private final LocationRepository repository;
     private final VehiculeServiceImpl vehiculeService;
+    private final LocataireServiceImpl locataireService;
 
-    public LocationServiceImpl(LocationRepository repository, VehiculeServiceImpl vehiculeService) {
+    public LocationServiceImpl(LocationRepository repository,
+                               VehiculeServiceImpl vehiculeService,
+                               LocataireServiceImpl locataireService) {
+        this.locataireService = locataireService;
         logger.info("Création du service Location");
         this.repository = repository;
         this.vehiculeService = vehiculeService;
@@ -64,7 +70,7 @@ public class LocationServiceImpl implements LocationService {
 
     /**
      * Cette fonction permet de supprimer une location de la base de données en passant par son id<br>
-     * <b>Requête Postman en DELETE</b> : localhost:8080/vehicules/<span style="color:orange">id</span>
+     * <b>Requête Postman en DELETE</b> : localhost:8080/locations/<span style="color:orange">id</span>
      * @param id L'id de la location à supprimer
      */
     @Override
@@ -104,21 +110,41 @@ public class LocationServiceImpl implements LocationService {
     }
 
     /**
-     * Cette fonction permet de retrouver une location en fonction de son locataire
-     * @param locataire Le locataire
-     * @return Une liste de Locations
+     * Cette fonction permet de retrouver une location grâce au nom du locataire<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/nom?nom=<span style="color:orange">nom</span>
+     * @param nom
+     * @return
      */
-    public List<Location> findAllByLocataire(Locataire locataire) {
-        return repository.findAllByLocataire(locataire);
+    public List<Location> findAllByLocataireName(String nom) {
+        List<Location> locations = this.repository.findAll();
+        List<Location> locationlist = new ArrayList<>();
+        logger.warn("locations : " + locations);
+        for (Location location: locations
+             ) {
+            if (Objects.equals(location.getLocataire().getNom(), nom)) {
+                locationlist.add(location);
+            }
+        }
+        return locationlist;
     }
 
     /**
-     * Cette fonction permet de retrouver une location en fonction de son véhicule
-     * @param vehicule Le vehicule
-     * @return Une liste de locations
+     * Cette fonction permet de retrouver une location grâce au numéro d'immatriculation du véhicule
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/immatriculation?immatriculation=<span style="color:orange">immatriculation</span>
+     * @param immatriculation L'immatriculation du véhicule
+     * @return Une liste de location
      */
-    public List<Location> findAllByVehicule(Vehicule vehicule) {
-        return repository.findAllByVehicule(vehicule);
+    public List<Location> findAllByImmatriculation(String immatriculation){
+        List<Location> locations = this.repository.findAll();
+        List<Location> locationlist = new ArrayList<>();
+        logger.warn("locations : " + locations);
+        for (Location location: locations
+        ) {
+            if (Objects.equals(location.getVehicule().getImmatriculation(), immatriculation)) {
+                locationlist.add(location);
+            }
+        }
+        return locationlist;
     }
 
     /**
@@ -137,6 +163,8 @@ public class LocationServiceImpl implements LocationService {
         Double prixTotal = prixUnitaire*duration;
         return prixTotal;
     }
+
+
 
 
 

@@ -1,5 +1,6 @@
 package fr.maxime.ecfback.locataires;
 
+import fr.maxime.ecfback.locations.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -67,7 +68,7 @@ public class LocataireServiceImpl implements LocataireService {
     }
 
     /**
-     * Cette fonction permet de retrouver un locataire grâce à son nom de famille
+     * Cette fonction permet de retrouver un locataire grâce à son nom de famille<br>
      * <b>Requête Postman en GET</b> : localhost:8080/locataires/findby?nom=<span style="color:orange">nom</span>
      * @param nom Le nom de famille du locataire
      * @return Une liste de locataire
@@ -77,7 +78,7 @@ public class LocataireServiceImpl implements LocataireService {
     }
 
     /**
-     * Cette fonction permet de retrouver un locataire grâce à son prénom
+     * Cette fonction permet de retrouver un locataire grâce à son prénom<br>
      * <b>Requête Postman en GET</b> : localhost:8080/locataires/findby?prenom=<span style="color:orange">prenom</span>
      * @param prenom Le prénom du locataire
      * @return Une liste de locataires
@@ -87,7 +88,7 @@ public class LocataireServiceImpl implements LocataireService {
     }
 
     /**
-     * Cette fonction permet de retrouver un locataire grâce à son nom de famille et son prénom
+     * Cette fonction permet de retrouver un locataire grâce à son nom de famille et son prénom<br>
      * <b>Requête Postman en GET</b> : localhost:8080/locataires/findby?nom=<span style="color:orange">nom</span>&prenom=<span style="color:orange">prenom</span>
      * @param nom Le nom de famille du locataire
      * @param prenom Le prénom du locataire
@@ -98,7 +99,7 @@ public class LocataireServiceImpl implements LocataireService {
     }
 
     /**
-     * Cette fonction permet de retrouver un locataire grâce à son email
+     * Cette fonction permet de retrouver un locataire grâce à son email<br>
      * <b>Requête Postman en GET</b> : localhost:8080/locataires/findby?email=<span style="color:orange">email</span>
      * @param email L'email du locataire
      * @return Le locataire recherché
@@ -106,4 +107,6 @@ public class LocataireServiceImpl implements LocataireService {
     public List<Locataire> findByEmail(String email) {
         return repository.findByEmail(email);
     }
+
+
 }

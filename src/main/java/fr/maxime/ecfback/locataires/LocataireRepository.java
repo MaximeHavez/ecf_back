@@ -1,5 +1,6 @@
 package fr.maxime.ecfback.locataires;
 
+import fr.maxime.ecfback.locations.Location;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface LocataireRepository extends MongoRepository<Locataire, String> 
     List<Locataire> findAllByNomAndPrenom(String nom, String prenom);
 
     List<Locataire> findByEmail(String email);
+
 }

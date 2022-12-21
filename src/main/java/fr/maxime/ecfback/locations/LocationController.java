@@ -1,9 +1,13 @@
 package fr.maxime.ecfback.locations;
 
+import fr.maxime.ecfback.locataires.Locataire;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
@@ -29,7 +33,8 @@ public class LocationController {
 
     /**
      * Cette fonction permet de sauvegarder une nouvelle location en base de données<br>
-     * Elle calcule le prix total de la location grâçe à la fonction calculPrixTotal du service
+     * Elle calcule le prix total de la location grâçe à la fonction calculPrixTotal du service<br>
+     * Si le véhicule est déjà loué, elle retourne une erreur 406 - NOT_ACCEPTABLE
      * et enregistre le résultat dans l'objet Location
      * <b>Requête Postman en POST</b> : localhost:8080/locations
      *
@@ -45,7 +50,11 @@ public class LocationController {
         Double prixTotal = service.calculPrixTotal(idVehicule, idLocation, dateDebut, dateFin);
         entity.setPrixTotal(prixTotal);
 
+        if (Objects.equals(entity.getVehicule().getStatus(), "Loué")) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Le véhicule est déjà loué");
+        }
         return service.save(entity);
+
     }
 
     /**
@@ -71,5 +80,62 @@ public class LocationController {
         service.deleteById(id);
     }
 
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de début de location<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datedebut?dateDebut=<span style="color:orange">dateDebut</span>
+     *
+     * @param dateDebut La date de début de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    @GetMapping("dateDebut")
+    public List<Location> findAllByDateDebut(@RequestParam LocalDate dateDebut) {
+        return service.findAllByDateDebut(dateDebut);
+    }
 
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de fin de location<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datefin?dateFin=<span style="color:orange">dateFin</span>
+     *
+     * @param dateFin La date de fin de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    @GetMapping("dateFin")
+    public List<Location> findAllByDateFin(LocalDate dateFin) {
+        return service.findAllByDateFin(dateFin);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location en fonction de sa date de début et de fin de location
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/datedebut&fin?dateDebut=<span style="color:orange">dateDebut</span>&dateFin=<span style="color:orange">dateFin</span>
+     *
+     * @param dateDebut La date de début de location (Format : "YYYY-MM-DD")
+     * @param dateFin   La date de fin de location (Format : "YYYY-MM-DD")
+     * @return Une liste de locations
+     */
+    @GetMapping("dateDebut&dateFin")
+    public List<Location> findAllByDateDebutAndDateFin(LocalDate dateDebut, String dateFin) {
+        return service.findAllByDateDebutAndDateFin(dateDebut, dateFin);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location grâce au nom du locataire<br>
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/nom?nom=<span style="color:orange">nom</span>
+     * @param nom
+     * @return
+     */
+    @GetMapping("nom")
+    public List<Location> findAllByLocataireName(@RequestParam String nom) {
+        return service.findAllByLocataireName(nom);
+    }
+
+    /**
+     * Cette fonction permet de retrouver une location grâce au numéro d'immatriculation du véhicule
+     * <b>Requête Postman en GET</b> : localhost:8080/locations/immatriculation?immatriculation=<span style="color:orange">immatriculation</span>
+     * @param immatriculation L'immatriculation du véhicule
+     * @return Une liste de location
+     */
+    @GetMapping("immatriculation")
+    public List<Location> findAllByImmatriculation(@RequestParam String immatriculation) {
+        return service.findAllByImmatriculation(immatriculation);
+    }
 }

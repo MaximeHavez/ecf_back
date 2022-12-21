@@ -62,7 +62,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule grâce à sa marque
+     * Cette fonction permet de retrouver un véhicule grâce à sa marque<br>
      * <b>Requête Postman en GET</b> : localhost:8080/vehicules/marque?marque=<span style="color:orange">marque</span>
      *
      * @param marque La marque du véhicule
@@ -74,7 +74,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule grâce à son modèle
+     * Cette fonction permet de retrouver un véhicule grâce à son modèle<br>
      * <b>Requête Postman en GET</b> : localhost:8080/vehicules/modele?modele=<span style="color:orange">modele</span>
      *
      * @param modele Le modèle du véhicule
@@ -86,7 +86,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule grâce à sa marque et son modèle
+     * Cette fonction permet de retrouver un véhicule grâce à sa marque et son modèle<br>
      * <b>Requête Postman en GET</b> : localhost:8080/vehicules/marque&modele?marque=<span style="color:orange">marque</span>&modele=<span style="color:orange">modele</span>
      *
      * @param marque La marque du véhicule
@@ -99,7 +99,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule en fonction de son type
+     * Cette fonction permet de retrouver un véhicule en fonction de son type<br>
      * <b>Requête Postman en GET</b> : localhost:8080/vehicules/type?type=<span style="color:orange">type</span>
      *
      * @param type Le type de véhicule (Voiture, Camion, etc)
@@ -111,7 +111,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule en fonction de son immatriculation
+     * Cette fonction permet de retrouver un véhicule en fonction de son immatriculation<br>
      * <b>Requête Postman en GET</b> : localhost:8080/vehicules/immatriculation?immatriculation=<span style="color:orange">immatriculation</span>
      *
      * @param immatriculation L'immatriculation du véhicule
@@ -123,7 +123,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule en fonction de son état
+     * Cette fonction permet de retrouver un véhicule en fonction de son état<br>
      * <b>Requête Postman en DELETE</b> : localhost:8080/vehicules/etat?etat=<span style="color:orange">etat</span>
      *
      * @param etat L'état du véhicule (A, B, C, D)
@@ -135,7 +135,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule en fonction de son prix de location à la journée
+     * Cette fonction permet de retrouver un véhicule en fonction de son prix de location à la journée<br>
      * <b>Requête Postman en DELETE</b> : localhost:8080/vehicules/prix?prix=<span style="color:orange">prix</span>
      *
      * @param prix Le prix de location à la journée du véhicule
@@ -147,7 +147,7 @@ public class VehiculeController {
     }
 
     /**
-     * Cette fonction permet de retrouver un véhicule en fonction de son status de location
+     * Cette fonction permet de retrouver un véhicule en fonction de son status de location<br>
      * <b>Requête Postman en DELETE</b> : localhost:8080/vehicules/status?status=<span style="color:orange">status</span>
      *
      * @param status Le status de location (Loué, Disponible)
