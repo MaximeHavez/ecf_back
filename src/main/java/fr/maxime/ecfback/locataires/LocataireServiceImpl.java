@@ -1,5 +1,7 @@
 package fr.maxime.ecfback.locataires;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,9 +12,12 @@ import java.util.Optional;
 @Service
 public class LocataireServiceImpl implements LocataireService {
 
+    Logger logger = LoggerFactory.getLogger(LocataireServiceImpl.class);
+
     private final LocataireRepository repository;
 
     public LocataireServiceImpl(LocataireRepository repository) {
+        logger.info("Création du service Locataire");
         this.repository = repository;
     }
 
@@ -45,7 +50,10 @@ public class LocataireServiceImpl implements LocataireService {
      */
     @Override
     public Locataire findById(String id) {
-        return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(()-> {
+            logger.warn("Id invalide : " + id);
+            return new ResponseStatusException(HttpStatus.NOT_FOUND);
+        });
     }
 
     /**

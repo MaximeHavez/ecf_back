@@ -1,5 +1,7 @@
 package fr.maxime.ecfback.vehicules;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,9 +12,12 @@ import java.util.Optional;
 @Service
 public class VehiculeServiceImpl implements VehiculeService {
 
+    Logger logger = LoggerFactory.getLogger(VehiculeServiceImpl.class);
+
     private final VehiculeRepository repository;
 
     public VehiculeServiceImpl(VehiculeRepository repository) {
+        logger.info("Création du service Vehicule");
         this.repository = repository;
     }
 
@@ -45,7 +50,10 @@ public class VehiculeServiceImpl implements VehiculeService {
      */
     @Override
     public Vehicule findById(String id) {
-        return repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(()-> {
+            logger.warn("Id invalide : " + id);
+            return new ResponseStatusException(HttpStatus.NOT_FOUND);
+        });
     }
 
     /**

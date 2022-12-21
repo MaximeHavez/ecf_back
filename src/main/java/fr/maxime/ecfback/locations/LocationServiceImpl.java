@@ -22,6 +22,7 @@ public class LocationServiceImpl implements LocationService {
     private final VehiculeServiceImpl vehiculeService;
 
     public LocationServiceImpl(LocationRepository repository, VehiculeServiceImpl vehiculeService) {
+        logger.info("Création du service Location");
         this.repository = repository;
         this.vehiculeService = vehiculeService;
     }
@@ -55,7 +56,10 @@ public class LocationServiceImpl implements LocationService {
      */
     @Override
     public Location findById(String id) {
-        return repository.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return repository.findById(id).orElseThrow(()-> {
+            logger.warn("Id invalide : " + id);
+            return new ResponseStatusException(HttpStatus.NOT_FOUND);
+        });
     }
 
     /**
@@ -131,7 +135,6 @@ public class LocationServiceImpl implements LocationService {
         Double prixUnitaire = this.vehiculeService.findById(idVoiture).getPrix();
         Long duration = ChronoUnit.DAYS.between(dateDebut, dateFin);
         Double prixTotal = prixUnitaire*duration;
-        logger.info("Prix Total : " + prixTotal);
         return prixTotal;
     }
 
