@@ -10,7 +10,7 @@ public interface LocationService {
 
     Location findById(String id);
 
-    Location update(String id);
+    Location update(String id, Location location);
 
     void deleteById(String id);
 

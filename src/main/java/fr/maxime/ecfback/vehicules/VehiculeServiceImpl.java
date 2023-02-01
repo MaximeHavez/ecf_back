@@ -63,8 +63,7 @@ public class VehiculeServiceImpl implements VehiculeService {
      * @return Le véhicule mis à jour
      */
     @Override
-    public Vehicule update(String id) {
-        Vehicule vehicule = this.findById(id);
+    public Vehicule update(String id, Vehicule vehicule) {
         if (!Objects.equals(vehicule.getId(), id)) {
             logger.warn("In invalide : " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

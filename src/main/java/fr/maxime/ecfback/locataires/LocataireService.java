@@ -9,7 +9,7 @@ public interface LocataireService {
 
     Locataire findById(String id);
 
-    Locataire update(String id);
+    Locataire update(String id, Locataire locataire);
 
     void deleteById(String id);
 

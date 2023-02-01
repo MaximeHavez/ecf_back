@@ -66,8 +66,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location update(String id) {
-        Location location = this.findById(id);
+    public Location update(String id, Location location) {
         if (!Objects.equals(location.getId(), id)) {
             logger.warn("In invalide : " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

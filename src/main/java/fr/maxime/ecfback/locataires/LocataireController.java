@@ -117,7 +117,7 @@ public class LocataireController {
      * @return Le locataire mis à jour
      */
     @PutMapping("{id}")
-    public Locataire update(@PathVariable String id) {
-        return service.update(id);
+    public Locataire update(@PathVariable String id, @RequestBody Locataire locataire) {
+        return service.update(id, locataire);
     }
 }

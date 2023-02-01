@@ -164,7 +164,7 @@ public class VehiculeController {
      * @param id L'id du véhicule
      * @return Le véhicule mis à jour
      */
-    public Vehicule update(String id) {
-        return service.update(id);
+    public Vehicule update(String id, Vehicule vehicule) {
+        return service.update(id, vehicule);
     }
 }

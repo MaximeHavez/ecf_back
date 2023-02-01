@@ -63,8 +63,7 @@ public class LocataireServiceImpl implements LocataireService {
      * @return Le locataire mis à jour
      */
     @Override
-    public Locataire update(String id) {
-        Locataire locataire = this.findById(id);
+    public Locataire update(String id, Locataire locataire) {
         if (!Objects.equals(locataire.getId(), id)) {
             logger.warn("In invalide : " + id);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

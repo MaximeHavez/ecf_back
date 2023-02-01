@@ -137,4 +137,8 @@ public class LocationController {
     public List<Location> findAllByImmatriculation(@RequestParam String immatriculation) {
         return service.findAllByImmatriculation(immatriculation);
     }
+    @PutMapping("{id}")
+    public Location update(String id, Location location) {
+        return service.update(id, location);
+    }
 }
